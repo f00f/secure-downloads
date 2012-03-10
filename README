@@ -1,0 +1,29 @@
+WordPress Plugin
+
+Author: f00f
+Website: http://www.tauchclub-bamberg.de/
+Version: 0.1
+Date: 2012-03-10
+
+== Specification ==
+Provide functionality for private downloads. Only logged-in users shall be able to download files.
+
+x The downloads are stored in a folder outside the web-root
+x The subfolders contain a config file which defined the minimum user level
+x Shortcode to list contents of a subfolder of DL_ROOT (if allowed)
+- URLs beginning with DL_BASEURL are redirected to dl.php
+- dl.php checks permissions, sends headers and file content
+- not yet [show.php checks permissions and displays file content (embedded in WP?)]
+x Message, when not logged in: login
+x Message, when logged in: insufficient permissions
+
+== Configuration ==
+DL_ROOT = root directory of downloads (outside web-root)
+DL_BASEURL = URL prefix for all downloads (e.g. /downloads/)
+File in folder to config permission level: .permissions.php
+
+== Shortcodes ==
+[list_dir dir="<relpath>"]
+[show_file file="<relpath>"]
+<relpath> is relative to DL_ROOT
+Messages as defined above
