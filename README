@@ -1,29 +1,42 @@
-WordPress Plugin
+Secure Downloads - a WordPress Plugin to restrict downloads to specific user levels.
 
 Author: f00f
 Website: http://www.tauchclub-bamberg.de/
 Version: 0.1
 Date: 2012-03-10
 
+
 == Specification ==
-Provide functionality for private downloads. Only logged-in users shall be able to download files.
+The plugin ``Secure Downloads'' provides functionality for private downloads.
+Only logged-in users are be able to download files. A minimum user level can
+be defined on a per-folder basis.
 
-x The downloads are stored in a folder outside the web-root
-x The subfolders contain a config file which defined the minimum user level
-x Shortcode to list contents of a subfolder of DL_ROOT (if allowed)
-- URLs beginning with DL_BASEURL are redirected to dl.php
-- dl.php checks permissions, sends headers and file content
-- not yet [show.php checks permissions and displays file content (embedded in WP?)]
-x Message, when not logged in: login
-x Message, when logged in: insufficient permissions
+Features:
+- The download files are stored in a folder outside of the web-root.
+- Each subfolder contains a config file which defines the minimum required WP user level.
+- Shortcode to list files of a download folder on a WP page (if allowed)
+- Download links begin with the prefix ``SD_DL_BASEURL'' which is redirected to dl.php
+- dl.php checks permissions, sends headers, and file content for download
+- Shortcode to embed contents of a file in a download folder (if allowed)
 
-== Configuration ==
-DL_ROOT = root directory of downloads (outside web-root)
-DL_BASEURL = URL prefix for all downloads (e.g. /downloads/)
-File in folder to config permission level: .permissions.php
 
 == Shortcodes ==
 [list_dir dir="<relpath>"]
 [show_file file="<relpath>"]
-<relpath> is relative to DL_ROOT
-Messages as defined above
+Notes:
+- <relpath> is relative to SD_DL_ROOT
+- Message, when not logged in: login
+- Message, when logged in: insufficient permissions
+
+
+== Configuration ==
+SD_DL_ROOT = root directory of downloads (outside web-root)
+SD_DL_BASEURL = URL prefix for all downloads (e.g. /downloads/)
+File in folder to config permission level (see ``Permissions File'')
+
+
+== Permissions File ==
+Each downloads folder contains a file with the permissions required to access
+the files in it. It defines the minimum WordPress user level.
+File name: .permissions.php
+File content: <?php $sd_min_level = 1; ?>
